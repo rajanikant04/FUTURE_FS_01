@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 function StarBackground() {
     const [stars, setStars] = useState([]);
     const [meteors, setMeteors] = useState([]);
+
     
     const generateStars = () => {
         const numberOfStars = Math.floor(window.innerWidth * window.innerHeight / 10000);
@@ -46,6 +47,15 @@ function StarBackground() {
 
     useEffect(()=>{
         generateStars();
+        generateMeteors();
+
+        const handleResize =() =>{
+            generateStars();
+        }
+
+        window.addEventListener('resize' , handleResize)
+
+        return () => window.removeEventListener("resize" , handleResize)
     },[])
 
   return (
@@ -58,6 +68,16 @@ function StarBackground() {
                 top: star.y + '%',
                 opacity: star.opacity ,
                 animationDuration: star.animationDuration + 's',
+            }}  />
+        ))}
+        {meteors.map((meteor)=> (
+            <div key={meteor.id} className='meteor animate-meteor' style={{
+                width: meteor.size *50 + 'px',
+                height: meteor.size + 'px',
+                left: meteor.x + '%',
+                top: meteor.y + '%',
+                animationDelay: meteor.delay ,
+                animationDuration: meteor.animationDuration + 's',
             }}  />
         ))}
     </div>
