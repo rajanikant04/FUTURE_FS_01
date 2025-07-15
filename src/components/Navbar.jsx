@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { cn } from '../lib/utils'
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
 
 const navItems = [
     {name: "Home", href: "#hero"},
@@ -13,7 +13,7 @@ const navItems = [
 function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     useEffect(()=> {
         const handleScroll = () => {
@@ -22,14 +22,36 @@ function Navbar() {
         window.addEventListener("scroll" , handleScroll)
         return () => window.removeEventListener("scroll" , handleScroll);
     }, [])
+
+    useEffect(()=> {
+        // Check theme on mount
+        const storedTheme = localStorage.getItem("theme")
+        if(storedTheme === "dark") {
+            setIsDarkMode(true);
+        }
+    }, [])
+
+    const toggleTheme = () => {
+        if(isDarkMode) {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme" , "light")
+            setIsDarkMode(false)
+        }
+        else{
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("theme" , "dark")
+            setIsDarkMode(true)
+        }
+    }
   return (
     <nav className={cn("fixed w-full z-40 transition-all duration-300", isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"  : "py-5" )} >
         <div className='container flex items-center justify-between'>
-            <a className='text-xl font-bold text-primary flex items-center' href='#hero'>
+            <a className='text-xl font-bold flex items-center max-sm:text-lg' href='#hero'>
                 <span className='relative z-10'>
-                    <span className='text-glow text-foreground'>
+                    <span className='text-glow text-primary'>
                         Rajanikant's
-                    </span> Portfolio
+                    </span> 
+                    <span className='text-foreground ml-1'>Portfolio</span>
                 </span>
             </a>
             {/* Desktop nav */}
@@ -42,11 +64,20 @@ function Navbar() {
             </div>
             
             {/* Mobile nav */}
-            <button onClick={() => setIsMenuOpen((prev)=> !prev)} 
-                className='md:hidden p-2 text-foreground z-50'
-                aria-label={isMenuOpen ? "Close Menu": "Open Menu"}
-            >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} /> } </button>
+            <div className='md:hidden flex items-center space-x-2'>
+                <button 
+                    onClick={toggleTheme}
+                    className='p-2 text-foreground rounded-full hover:bg-card transition-colors'
+                    aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+                >
+                    {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                </button>
+                <button onClick={() => setIsMenuOpen((prev)=> !prev)} 
+                    className='p-2 text-foreground z-50 relative'
+                    aria-label={isMenuOpen ? "Close Menu": "Open Menu"}
+                >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} /> } </button>
+            </div>
 
             <div className={cn("fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
              "transition-all duration-300 md:hidden", 
