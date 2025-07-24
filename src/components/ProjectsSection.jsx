@@ -4,30 +4,30 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react"
 const projects = [
     {
       id:1, 
-      title: "Saas Landing Page",
-      description: "A beatiful landing page app using React and Tailwind",
-      image: "/projects/project1.jpg",
-      tags: ["React", "TailwindCSS", "Supabase"],
-      demoUrl: "#",
-      githubUrl: "#"
+      title: "Orbit._ - Social Media Platform",
+      description: "A full-stack social media website with modern UI and real-time features",
+      image: "/projects/orbit.png",
+      tags: ["JavaScript", "Node.js", "React", "Full-Stack"],
+      demoUrl: "https://orbit-8rsw.onrender.com",
+      githubUrl: "https://github.com/rajanikant04/Orbit._"
     },
     {
       id:2, 
-      title: "Saas Landing Page",
-      description: "A beatiful landing page app using React and Tailwind",
-      image: "/projects/project2.jpeg",
-      tags: ["React", "TailwindCSS", "Supabase"],
+      title: "Atom Mail - AI Email Assistant",
+      description: "Smart email management system with AI-powered composition, replies, and voice-to-text features",
+      image: "/projects/atom-mail.png",
+      tags: ["TypeScript", "Next.js", "AI/ML", "Gmail API"],
       demoUrl: "#",
-      githubUrl: "#"
+      githubUrl: "https://github.com/rajanikant04/hackfest"
     },
     {
       id:3, 
-      title: "Saas Landing Page",
-      description: "A beatiful landing page app using React and Tailwind",
-      image: "/projects/project3.jpeg",
-      tags: ["React", "TailwindCSS", "Supabase"],
-      demoUrl: "#",
-      githubUrl: "#"
+      title: "Smart Expense Tracker",
+      description: "Modern financial management app with budgeting, expense tracking, and data visualization",
+      image: "/projects/expense-tracker.png",
+      tags: ["Next.js", "Drizzle ORM", "Clerk Auth", "Charts"],
+      demoUrl: "https://expense-tracker-fawn-five-34.vercel.app",
+      githubUrl: "https://github.com/rajanikant04/expense_tracker"
     },
 ]
 
@@ -39,7 +39,7 @@ function ProjectsSection() {
           Featured <span className="text-primary"> Projects</span> 
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Here are my some best projects.
+          Explore my portfolio of innovative web applications, each crafted with modern technologies and user-centric design principles.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, key)=> (
